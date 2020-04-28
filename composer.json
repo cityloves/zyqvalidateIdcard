@@ -1,0 +1,11 @@
+{
+    "name": "zyqvalidate/idcard",
+    "description": "zyqvalidate/idcard",
+    "authors": [
+        {
+            "name": "张勇奇",
+            "email": "zhangyongqi@zhangyongqideMacBook-Air.local"
+        }
+    ],
+    "require": {}
+}
