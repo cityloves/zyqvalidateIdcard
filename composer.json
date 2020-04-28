@@ -4,5 +4,10 @@
     "type": "library",
     "minimum-stability": "stable",
     "version": "1.0.1",
-    "license": "proprietary"
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Validator\\": "src/"
+        }
+    }
 }
