@@ -42,16 +42,15 @@ class IdcardValidate extends Validator
      */
     public function validateAttribute($model, $attribute)
     {
-    	$this->idNumber = strtoupper(trim($this->idNumber));
+        $this->idNumber = strtoupper(trim($model->$attribute));
 
-        $this->idLength = strlen($model->$attribute);
-
+        $this->idLength = strlen($this->idNumber);
         if ($this->checkFormat() && $this->checkBirth() && $this->checkLastCode()) {
 
             return true;
         }
 
-		return $this->addError($model, $attribute, '身份证号格式错误');
+        return $this->addError($model, $attribute, '身份证号格式错误');
     }
 
     /**
@@ -116,5 +115,27 @@ class IdcardValidate extends Validator
             return false;
         }
         return true;
+    }
+
+    /**
+     * 将 15 位身份证转化为 18 位身份证号码
+     *
+     * @return string
+     */
+    protected function id15To18()
+    {
+        if ($this->idLength == 15) {
+            // 如果身份证顺序码是996 997 998 999，这些是为百岁以上老人的特殊编码
+            if (array_search(substr($this->idNumber, 12, 3), ['996', '997', '998', '999']) !== false) {
+                $this->idNumber = substr($this->idNumber, 0, 6) . '18' . substr($this->idNumber, 6, 9);
+            } else {
+                $this->idNumber = substr($this->idNumber, 0, 6) . '19' . substr($this->idNumber, 6, 9);
+            }
+
+            // 补全最后一位
+
+        }
+
+        return $this->idNumber;
     }
 }

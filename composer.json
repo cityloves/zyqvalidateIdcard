@@ -3,7 +3,7 @@
     "description": "zyqvalidate/idcard",
     "type": "library",
     "minimum-stability": "stable",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "license": "proprietary",
     "autoload": {
         "psr-4": {
